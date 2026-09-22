@@ -1,3 +1,9 @@
+---
+name: core-and-host
+description: Reusable runtime logic is tangled with CLI or UI behavior.
+category: structure-and-boundaries
+---
+
 # Core and host
 
 ## Intent
@@ -21,9 +27,13 @@ host: CLI / UI / RPC / configuration / product policy
 
 ## Pi example
 
-**Observed:** `pi-agent-core` owns agent state, tool execution, and event streaming. `pi-coding-agent` owns CLI modes, sessions, resource loading, UI, and extensions. The same core events can feed interactive, print, JSON, or RPC modes. See [`pi-agent-core`](https://github.com/earendil-works/pi/blob/3390bd93630965a12a0a1a5c36ce890ec22f7e1d/packages/agent/README.md) and [`coding-agent extensions`](https://github.com/earendil-works/pi/blob/3390bd93630965a12a0a1a5c36ce890ec22f7e1d/packages/coding-agent/docs/extensions.md).
+**Observed:** `pi-agent-core` owns agent state, tool execution, and event streaming. `pi-coding-agent` owns CLI modes, sessions, resource loading, UI, and extensions. The same core events can feed interactive, print, JSON, or RPC modes. See [`pi-agent-core`](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12bef056a7058c3dd49dfe41abe/packages/agent/README.md) and [`coding-agent extensions`](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12bef056a7058c3dd49dfe41abe/packages/coding-agent/docs/extensions.md).
 
-**Recommended:** Keep the core unaware of product presentation. Let the host decide how to display, configure, authorize, and package the core.
+**Observed (v0.87.1):** The split repeats inside `pi-coding-agent`. `AgentSession` acts as the core, and each mode acts as a host. Interactive, print, JSON, RPC, and SDK modes drive the same session. Each injects its own ports when it binds extensions: a UI context, command actions, a shutdown handler, and an error sink. The core returns diagnostics, and the host decides how to show them. See [[host-owned-ui-port|Host-owned UI port]].
+
+**Observed (v0.87.1):** Policy defaults differ by host. The CLI resolves project trust before it loads project resources. The SDK's `SettingsManager.create` defaults `projectTrusted` to `true`. See [[trust-gated-loading|Trust-gated loading]].
+
+**Recommended:** Keep the core unaware of product presentation. Let the host decide how to display, configure, authorize, and package the core. Write down each host's policy defaults next to its entry point.
 
 ## Benefits
 
@@ -48,3 +58,11 @@ host: CLI / UI / RPC / configuration / product policy
 - Which behavior would still matter if the current UI disappeared?
 - Which state belongs to the engine and which belongs to the product?
 - Can a second presentation consume the core without branching its semantics?
+- Which policy defaults does each host set, and where are they written down?
+
+## Related patterns
+
+- [[host-owned-ui-port|Host-owned UI port]]
+- [[extensions-before-core|Extensions before core]]
+- [[trust-gated-loading|Trust-gated loading]]
+- [[canonical-record-projected-per-target|Canonical record, projected per target]]

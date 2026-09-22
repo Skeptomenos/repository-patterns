@@ -1,3 +1,9 @@
+---
+name: extensions-before-core
+description: Every feature wants another core flag or special case.
+category: extensibility-and-plugins
+---
+
 # Extensions before core
 
 ## Intent
@@ -21,9 +27,15 @@ An extension boundary is useful only if its lifecycle, capabilities, errors, and
 
 ## Pi example
 
-**Observed:** Pi's contributor guidance says the core should remain minimal and that features should be extensions where possible. The coding agent exposes extensions for tools, commands, UI, shortcuts, providers, and events. See [`CONTRIBUTING.md`](https://github.com/earendil-works/pi/blob/3390bd93630965a12a0a1a5c36ce890ec22f7e1d/CONTRIBUTING.md) and [`extensions.md`](https://github.com/earendil-works/pi/blob/3390bd93630965a12a0a1a5c36ce890ec22f7e1d/packages/coding-agent/docs/extensions.md).
+**Observed:** Pi's contributor guidance says the core should remain minimal and that features should be extensions where possible. The coding agent exposes extensions for tools, commands, UI, shortcuts, providers, and events. See [`CONTRIBUTING.md`](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12bef056a7058c3dd49dfe41abe/CONTRIBUTING.md) and [`extensions.md`](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12bef056a7058c3dd49dfe41abe/packages/coding-agent/docs/extensions.md).
 
-**Recommended:** Ask whether the feature changes the core invariant or only adds a capability. Keep it outside the core when the latter is true.
+**Observed (history):** Pi 0.35.0 merged hooks and custom tools into one extension system ([`CHANGELOG.md`](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12bef056a7058c3dd49dfe41abe/packages/coding-agent/CHANGELOG.md#L4263-L4265)). At v0.87.1, one extension API covers tools, commands, shortcuts, flags, renderers, providers, events, and an inter-extension bus.
+
+**Observed:** `CONTRIBUTING.md` also limits the seams themselves: hook points "should be well considered and discussed to avoid adding unmaintainable bloat and complex interactions".
+
+**Inferred:** Each seam is core surface with a budget. Pi makes the principle workable with a set of supporting patterns: a [[customization-ladder|customization ladder]], [[two-phase-extension-registration|two-phase registration]], [[fault-isolated-event-dispatch|fault-isolated dispatch]], [[layered-resource-discovery|layered discovery]], and [[built-ins-through-public-seams|built-ins that ship through the same seams]].
+
+**Recommended:** Ask whether the feature changes the core invariant or only adds a capability. Keep it outside the core when the latter is true. Discuss a new seam as carefully as a new core feature.
 
 ## Benefits
 
@@ -48,3 +60,10 @@ An extension boundary is useful only if its lifecycle, capabilities, errors, and
 - What is the smallest stable hook?
 - What happens when an extension fails or is reloaded?
 - Which permissions and capabilities does the extension receive?
+
+## Related patterns
+
+- [[customization-ladder|Customization ladder]]
+- [[two-phase-extension-registration|Two-phase extension registration]]
+- [[built-ins-through-public-seams|Built-ins through public seams]]
+- [[core-and-host|Core and host]]

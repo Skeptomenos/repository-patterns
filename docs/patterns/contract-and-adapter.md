@@ -1,3 +1,9 @@
+---
+name: contract-and-adapter
+description: Vendor or infrastructure changes keep spreading through the core.
+category: structure-and-boundaries
+---
+
 # Contract and adapter
 
 ## Intent
@@ -21,9 +27,13 @@ The contract should describe what the application needs, not mirror every detail
 
 ## Pi example
 
-**Observed:** `pi-ai` normalizes providers and model streaming behind common types. `pi-agent-core` consumes the normalized stream instead of importing each provider. The SQLite session backend is a separate package so the core does not pull in Node-specific runtime dependencies. See [`pi-agent-core`](https://github.com/earendil-works/pi/blob/3390bd93630965a12a0a1a5c36ce890ec22f7e1d/packages/agent/README.md) and [`pi-ai`](https://github.com/earendil-works/pi/tree/3390bd93630965a12a0a1a5c36ce890ec22f7e1d/packages/ai).
+**Observed:** `pi-ai` normalizes providers and model streaming behind common types. `pi-agent-core` consumes the normalized stream instead of importing each provider. The SQLite session backend is a separate package so the core does not pull in Node-specific runtime dependencies. See [`pi-agent-core`](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12bef056a7058c3dd49dfe41abe/packages/agent/README.md) and [`pi-ai`](https://github.com/earendil-works/pi/tree/f07218c4d4bbc12bef056a7058c3dd49dfe41abe/packages/ai).
 
-**Recommended:** Define the semantic contract first, then write one adapter as a reference. Keep provider or runtime-specific policy out of the contract unless every consumer truly needs it.
+**Observed (v0.87.1):** `pi-agent-core` still depends on the `pi-ai` package for shared types and normalization, but on no provider SDK. The provider boundary has two axes, wire API and vendor; see [[protocol-and-vendor-axes|Protocol and vendor axes]]. Only `normalizeContext()` can produce the branded `TranscriptContext` type, so raw input cannot reach an adapter. Cross-cutting policy, such as auth merging and header order, sits in the `Models` collection, not in each adapter.
+
+**Observed (v0.87.1):** `pi-durable` repeats the idea for storage. Portable SQLite logic depends on a small synchronous facade, and the Node adapter sits behind `./storage/sqlite/node`. See [[runtime-named-entry-points|Runtime-named entry points]].
+
+**Recommended:** Define the semantic contract first, then write one adapter as a reference. Keep provider or runtime-specific policy out of the contract unless every consumer truly needs it. Put cross-cutting policy in the layer that owns the collection of adapters.
 
 ## Benefits
 
@@ -49,3 +59,10 @@ The contract should describe what the application needs, not mirror every detail
 - What behavior must remain stable if the provider changes?
 - Which differences should be visible capabilities rather than hidden translation?
 - Can the contract be tested without the external system?
+
+## Related patterns
+
+- [[protocol-and-vendor-axes|Protocol and vendor axes]]
+- [[capabilities-as-data|Capabilities as data]]
+- [[conformance-tests|Conformance tests]]
+- [[runtime-named-entry-points|Runtime-named entry points]]

@@ -45,6 +45,8 @@ flowchart TB
 
 The graph is layered but not a single straight line. Chord, remote transport, durable design, and evaluation are parallel capabilities.
 
+**Observed:** The edges come from each package's `dependencies` at v0.87.1. `pi-coding-agent` lists client, protocol, and server only as dev dependencies, for its experimental path. `pi-evals` is private and depends on the others only for development. See the [[pi-repository-layout|repository layout]] for the full table.
+
 ## Layer observations
 
 ### Foundations
@@ -63,9 +65,15 @@ Chord, telemetry, and TUI are reusable concerns. They are kept outside the main 
 
 `pi-coding-agent` composes the core with sessions, resources, tools, extensions, and presentation modes. This is where product-specific decisions live.
 
+### Extension boundary
+
+Inside `pi-coding-agent`, `AgentSession` is a mode-independent core, and each mode is a host. Extensions register through one API in two phases, receive a UI port that each host implements, and store state as entries in the session log. Resources come from ranked scopes, and project resources load only after trust is resolved. See [[two-phase-extension-registration|Two-phase extension registration]] and [[layered-resource-discovery|Layered resource discovery]].
+
 ### Recovery boundary
 
 The harness and session designs model durable state, operation admission, effect-pending work, and recovery. This is the most specialized part of the architecture and the least suitable for casual copying.
+
+**Observed:** At v0.87.1 the shipped CLI builds the plain `Agent`. The harness runs only on the experimental server and worker path. `pi-durable` is a second, separate durable design (Pico5); only its storage layers are implemented.
 
 ### Remote boundary
 
@@ -80,12 +88,15 @@ Pi's README is explicit that the agent does not provide a built-in filesystem, p
 The repository's strongest design move is aligning package boundaries with sources of change:
 
 ```text
-provider change      -> pi-ai
-agent-loop change    -> pi-agent-core
-product/UI change    -> coding-agent or extensions
-storage change       -> session backend
-transport change     -> protocol/client/server
-observability change -> telemetry
+provider change       -> pi-ai (vendor factory or catalog data)
+wire-protocol change  -> pi-ai src/api/
+agent-loop change     -> pi-agent-core
+product/UI change     -> coding-agent or extensions
+storage change        -> session backend
+runtime-target change -> runtime-named subpath adapter
+transport change      -> protocol/client/server
+composition change    -> chord
+observability change  -> telemetry
 ```
 
-That alignment is more reusable than any individual folder name.
+That alignment is more reusable than any individual folder name. Executable checks keep it from eroding; see [[executable-architecture-checks|Executable architecture checks]].

@@ -1,3 +1,9 @@
+---
+name: opaque-transport
+description: Transport code is accumulating business semantics.
+category: structure-and-boundaries
+---
+
 # Opaque transport
 
 ## Intent
@@ -21,9 +27,15 @@ The transport can validate envelopes, identity, correlation, limits, and lifecyc
 
 ## Pi example
 
-**Observed:** `pi-protocol` owns framing, CBOR, routing, correlation, cancellation, and subscriptions. Its payloads remain application-owned. `pi-client` and `pi-server` expose transport-neutral boundaries instead of embedding agent semantics into the wire format.
+**Observed:** `pi-protocol` owns routed envelopes, a version handshake (`PROTOCOL_VERSION = 8`), a CBOR codec with limits, and length-prefixed framing. It checks only that payloads are strict JSON. `pi-client` and `pi-server` expose transport-neutral boundaries instead of embedding agent semantics into the wire format.
 
-See [`pi-protocol`](https://github.com/earendil-works/pi/blob/3390bd93630965a12a0a1a5c36ce890ec22f7e1d/packages/protocol/README.md) and [`pi-client`](https://github.com/earendil-works/pi/blob/3390bd93630965a12a0a1a5c36ce890ec22f7e1d/packages/client/README.md).
+**Observed (v0.87.1):** Opacity is layered, not binary. Chord owns the service call and control grammar. Commit [`1a7bc80e`](https://github.com/earendil-works/pi/commit/1a7bc80e) ("move service wire semantics into Chord") took that grammar out of the protocol package. Subscriptions are not a protocol primitive: subscribe and unsubscribe are ordinary requests that carry Chord control calls, and only update delivery has its own envelope. The server parses the service grammar, but not business arguments.
+
+**Observed (v0.87.1):** Every call carries a composite target: server id, session id, and a server-generated attachment id. A server conformance test "rejects a stale attachment route after switching Sessions" ([`conformance.test.ts` L246](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12bef056a7058c3dd49dfe41abe/packages/server/test/conformance.test.ts#L246)). The client "never reconnects or replays requests automatically" ([`client README` L34](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12bef056a7058c3dd49dfe41abe/packages/client/README.md#L34)). In-process consumers use the same service binding over a loopback transport, so local and remote paths share semantics.
+
+**Observed:** The protocol is experimental and has no compatibility guarantees.
+
+See [`pi-protocol`](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12bef056a7058c3dd49dfe41abe/packages/protocol/README.md) and [`pi-client`](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12bef056a7058c3dd49dfe41abe/packages/client/README.md).
 
 ## Benefits
 
@@ -48,3 +60,11 @@ See [`pi-protocol`](https://github.com/earendil-works/pi/blob/3390bd93630965a12a
 - Which identity, routing, and lifecycle facts belong to transport?
 - Which payload semantics belong to the application?
 - How are disconnects, retries, and accepted remote work represented?
+- Which identity must each call carry, so that a stale route fails instead of reaching the wrong target?
+- Does the local path use the same semantics as the remote path?
+
+## Related patterns
+
+- [[host-owned-ui-port|Host-owned UI port]]
+- [[application-neutral-substrate|Application-neutral substrate]]
+- [[in-band-terminal-streams|In-band terminal streams]]

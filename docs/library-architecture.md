@@ -91,6 +91,36 @@ sequenceDiagram
 - **Recommended:** A reader should inspect one pattern and one example before proposing adoption.
 - **Inferred:** This structure should reduce cargo-cult copying because it puts fit and trade-offs beside the example.
 
+## Level 3 — Discovery path for agents
+
+**Purpose:** This section answers “How does an agent in another session find what it needs, starting from nothing but the repository root?”
+
+```mermaid
+flowchart LR
+    Agents[AGENTS.md\nroot of discovery]
+    Index[index\nmap and evidence pins]
+    Catalog[catalog\nneed to pattern]
+    Pattern[pattern page\nfrontmatter + body]
+    Related[related patterns]
+    Case[case study\nevidence]
+    Worksheet[adoption worksheet]
+
+    Agents --> Index --> Catalog --> Pattern
+    Pattern --> Related --> Pattern
+    Pattern --> Case --> Worksheet
+```
+
+| Mechanism | What it guarantees | Enforced by |
+|---|---|---|
+| Wiki links (`[[name]]`) | A reference names its target document, independent of folders | `scripts/check_docs.py`: every wiki link resolves, including headings |
+| Unique file names | Each wiki link has exactly one target | `scripts/check_docs.py`: no duplicate basenames |
+| Reachability from `AGENTS.md` | Following links from the root reaches every document | `scripts/check_docs.py`: no orphaned pages |
+| Pattern frontmatter | An agent can scan every pattern's need without reading bodies | `scripts/check_docs.py`: `name`, `description`, `category` on every pattern |
+| Catalog coverage | Every pattern is routable by need, under its category | `scripts/check_docs.py`: catalog and pattern index list every pattern |
+| One pin per source repository | All evidence for a case study comes from one commit | `scripts/check_docs.py`: one ref per external repository, recorded in the index |
+
+The checks have their own tests (`scripts/test_check_docs.py`), and CI runs both. See [[0002-wiki-links-and-discovery]] for the decision and [[0003-self-adoption]] for which patterns this repository applies to itself.
+
 ## How to explore this map
 
-Start with [`docs/catalog.md`](catalog.md), then choose one pattern. Ask for a focused dive into a pattern, a case study, or an adoption worksheet rather than loading the entire repository at once.
+Start with [[catalog]], then choose one pattern. Ask for a focused dive into a pattern, a case study, or an adoption worksheet rather than loading the entire repository at once.

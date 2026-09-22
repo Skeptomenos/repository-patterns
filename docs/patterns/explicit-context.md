@@ -1,3 +1,9 @@
+---
+name: explicit-context
+description: Hidden globals make cancellation, telemetry, or testing fragile.
+category: core-runtime-design
+---
+
 # Explicit context
 
 ## Intent
@@ -24,7 +30,13 @@ The context should remain small and typed. It should not become a bag containing
 
 **Observed:** Pi's telemetry package uses explicit contexts and callbacks rather than a global current span. The agent and tool APIs expose abort and lifecycle hooks through options and events.
 
-See [`pi-telemetry`](https://github.com/earendil-works/pi/blob/3390bd93630965a12a0a1a5c36ce890ec22f7e1d/packages/telemetry/README.md) and [`pi-agent-core`](https://github.com/earendil-works/pi/blob/3390bd93630965a12a0a1a5c36ce890ec22f7e1d/packages/agent/README.md).
+**Observed (v0.87.1):** The harness takes a Chord `Context` as the trailing parameter of its asynchronous public methods. The context carries the abort signal and keyed values, and the telemetry parent sits under a key ([`harness/context.ts`](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12bef056a7058c3dd49dfe41abe/packages/agent/src/harness/context.ts)). The harness specification keeps invocation cancellation separate from durable cancellation, and says a context is never durable data. Chord marks call sites where context is not threaded yet with a named placeholder, `TODO_CONTEXT` ([`chord/src/context/index.ts` L56](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12bef056a7058c3dd49dfe41abe/packages/chord/src/context/index.ts#L56)).
+
+**Observed (counter-evidence):** Adoption is partial. The plain `Agent` takes `AbortSignal` options instead of a context, and `pi-agent-core` keeps a process-global default stream function.
+
+**Recommended:** Mark missing context propagation with a named placeholder, so the gaps can be found by search.
+
+See [`pi-telemetry`](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12bef056a7058c3dd49dfe41abe/packages/telemetry/README.md) and [`pi-agent-core`](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12bef056a7058c3dd49dfe41abe/packages/agent/README.md).
 
 ## Benefits
 
@@ -49,3 +61,9 @@ See [`pi-telemetry`](https://github.com/earendil-works/pi/blob/3390bd93630965a12
 - Which values must follow an operation across async boundaries?
 - Which dependencies should remain explicit parameters instead?
 - Can the context be divided into smaller contexts by concern?
+
+## Related patterns
+
+- [[application-neutral-substrate|Application-neutral substrate]]
+- [[two-phase-extension-registration|Two-phase extension registration]]
+- [[durable-effect-state|Durable effect state]]

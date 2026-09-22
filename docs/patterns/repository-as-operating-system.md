@@ -1,3 +1,9 @@
+---
+name: repository-as-operating-system
+description: Repository process is tribal knowledge.
+category: repository-operations-and-governance
+---
+
 # Repository as operating system
 
 ## Intent
@@ -27,9 +33,22 @@ Keep each document responsible for one kind of meaning. Put mutable status in an
 
 **Observed:** Pi combines a concise README, `AGENTS.md`, contributor guidance, `.pi` prompts and skills, safe test scripts, package-local documentation, and CI/release checks. Its own agent tooling is used to maintain the repository.
 
-See [`AGENTS.md`](https://github.com/earendil-works/pi/blob/3390bd93630965a12a0a1a5c36ce890ec22f7e1d/AGENTS.md), [`CONTRIBUTING.md`](https://github.com/earendil-works/pi/blob/3390bd93630965a12a0a1a5c36ce890ec22f7e1d/CONTRIBUTING.md), and the [root README](https://github.com/earendil-works/pi/blob/3390bd93630965a12a0a1a5c36ce890ec22f7e1d/README.md).
+See [`AGENTS.md`](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12bef056a7058c3dd49dfe41abe/AGENTS.md), [`CONTRIBUTING.md`](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12bef056a7058c3dd49dfe41abe/CONTRIBUTING.md), and the [root README](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12bef056a7058c3dd49dfe41abe/README.md).
 
-**Recommended:** Start with a small local context file and one reliable check. Add more structure only when repeated failures justify it.
+**Observed (v0.87.1):** Pi layers its guidance:
+
+- a short `AGENTS.md` with standing rules;
+- skills loaded on demand, for releasing and interactive testing;
+- prompt templates as maintainer macros: `/is`, `/pr`, `/cl`, `/wr`;
+- a project extension that imports CI agent sessions for local replay.
+
+`CONTRIBUTING.md` tells contributors to run agents from the repository root, so they pick up `AGENTS.md`. See [[progressive-disclosure|Progressive disclosure of instructions]] and [[multi-agent-safe-worktree|Multi-agent-safe working tree]].
+
+**Observed (v0.87.1):** Some rules have a mechanism behind them: erasable-only syntax (a compiler option), exact pins, the lockfile gate, and generated-file checks. Others are instructions only. The linter turns `noExplicitAny` off, although `AGENTS.md` forbids `any`. Two inline `await import(` calls remain in package sources, although `AGENTS.md` forbids them. Changelog placement is audited by the `/cl` prompt, not by a check.
+
+**Observed (drift):** Configuration drifts like instructions do. `CONTRIBUTING.md` sends provider-test guidance to `AGENTS.md`, but it lives in `.pi/skills/add-llm-provider.md`. Removed packages are still referenced in `biome.json`, the pre-commit hook, and `tsconfig.json`.
+
+**Recommended:** Start with a small local context file and one reliable check. Add more structure only when repeated failures justify it. Back each rule that matters with a check, and derive lists from manifests instead of copying them.
 
 ## Benefits
 
@@ -42,6 +61,7 @@ See [`AGENTS.md`](https://github.com/earendil-works/pi/blob/3390bd93630965a12a0a
 - Instruction sprawl can create contradictions.
 - A repository can optimize for agents at the expense of human readers.
 - Local instructions still need maintenance and review.
+- A rule without a mechanism drifts silently.
 
 ## Poor fit signals
 
@@ -54,3 +74,11 @@ See [`AGENTS.md`](https://github.com/earendil-works/pi/blob/3390bd93630965a12a0a
 - What does a new contributor need to know in the first five minutes?
 - Which command is the narrowest trustworthy validation path?
 - Which files are generated, and where is their source of truth?
+- Which rules have a mechanism behind them, and which rely on memory?
+
+## Related patterns
+
+- [[progressive-disclosure|Progressive disclosure of instructions]]
+- [[multi-agent-safe-worktree|Multi-agent-safe working tree]]
+- [[executable-architecture-checks|Executable architecture checks]]
+- [[attention-budget-gate|Attention-budget contribution gate]]

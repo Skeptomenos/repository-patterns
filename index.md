@@ -1,41 +1,57 @@
 # Repository Patterns index
 
-**Reconciled:** 2026-09-20
+**Reconciled:** 2026-09-22
 **Authority:** The repository owns stable guidance. This index owns the reading path and current coverage.
 
 ## Current scope
 
-The first release documents patterns visible in the Pi repository and translates them into recommendations for unrelated repositories. The writing deliberately separates evidence from advice.
+The library documents 36 patterns visible in the Pi repository and translates them into recommendations for unrelated repositories. The writing deliberately separates evidence from advice.
 
 ## Reading paths
 
 | If you want to... | Start here |
 |---|---|
-| Choose a pattern for a current design problem | [`docs/catalog.md`](docs/catalog.md) |
-| Understand the repository's own information architecture | [`docs/architecture.md`](docs/architecture.md) |
-| Learn how to use the material as an LLM | [`docs/using-this-repo.md`](docs/using-this-repo.md) |
-| See the ideas in one substantial codebase | [`docs/examples/pi/README.md`](docs/examples/pi/README.md) |
-| Add a pattern | [`docs/templates/pattern.md`](docs/templates/pattern.md) |
-| Add a case study | [`docs/templates/case-study.md`](docs/templates/case-study.md) |
+| Choose a pattern for a current design problem | [[catalog]] |
+| Understand why Pi's patterns fit together | [[pi-essence]] |
+| See how Pi arranges folders, packages, and documents | [[pi-repository-layout]] |
+| Understand the repository's own information architecture | [[library-architecture]] |
+| Learn how to use the material as an LLM | [[using-this-repo]] |
+| See the ideas in one substantial codebase | [[pi-case-study]] |
+| Add a pattern | [[pattern-template]] |
+| Add a case study | [[case-study-template]] |
+| See which patterns this repository applies to itself | [[0003-self-adoption]] |
+| Understand the wiki links and the discovery rules | [[0002-wiki-links-and-discovery]] |
 
 ## Coverage map
 
-| Area | Current documents | Next useful expansion |
+| Area | Current patterns | Next useful expansion |
 |---|---|---|
-| Boundaries | Contract and adapter; core and host; opaque transport | A small web application and a data pipeline |
-| Runtime reliability | Durable effects; single-writer mutation | Recovery after external callbacks and queues |
-| Extensibility | Extensions before core | Plugin versioning and lifecycle isolation |
-| Verification | Conformance tests; consumer-oriented verification | Security and performance evidence |
-| Repository operations | Repository as operating system | Multi-repository and monorepo trade-offs |
+| Structure and boundaries | Change-axis boundaries; contract and adapter; core and host; application-neutral substrate; runtime-named entry points; executable architecture checks; opaque transport; visible maturity | A small web application and a data pipeline |
+| Extensibility and plugins | Extensions before core; customization ladder; two-phase registration; fault-isolated dispatch; host-owned UI port; layered discovery; trust-gated loading; built-ins through public seams; extension state in the host log; progressive disclosure | Plugin versioning and compatibility over time |
+| Core runtime design | Protocol and vendor axes; capabilities as data; derived artifacts; in-band terminal streams; canonical record projected per target; explicit context; durable effect state; single-writer mutation | Recovery after external callbacks and queues |
+| Verification and release | Conformance tests; hermetic tests; consumer-oriented verification; documentation as a tested surface; dependencies as reviewed code; staged, reversible release | Security and performance evidence |
+| Repository operations and governance | Repository as operating system; multi-agent-safe working tree; attention-budget gate; declared trust boundary | Multi-repository and monorepo trade-offs |
 
 ## Current evidence boundary
 
-- The Pi example is a source and documentation analysis at commit `3390bd93630965a12a0a1a5c36ce890ec22f7e1d`.
-- The Pi case study does not claim that every documented experimental design is fully shipped or production-accepted.
+- The Pi example is a source, documentation, workflow, and git-history analysis at release v0.87.1, commit `f07218c4d4bbc12bef056a7058c3dd49dfe41abe`.
+- The first analysis used commit `3390bd93630965a12a0a1a5c36ce890ec22f7e1d`. Since 2026-09-22, v0.87.1 owns every claim and link. The case study lists the [[pi-case-study#Corrections since the first analysis|corrections]].
+- The Pi case study does not claim that every documented experimental design is fully shipped or production-accepted. At v0.87.1 the durable harness runs only on an experimental path.
 - No target repository is assumed to need Pi's number of packages, durable runtime, or contributor gate.
+
+## Candidate patterns not yet written
+
+These appeared in the v0.87.1 analysis. They have evidence but were judged too narrow or too language-specific for a page today.
+
+- Source-ordered concurrent tool batches (`pi-agent-core` `agent-loop.ts`).
+- Line-array UI components with swappable differential renderers (`pi-tui`).
+- Optional native capability with graceful absence (`pi-tui` native helpers).
+- Host-injected modules for build-free TypeScript plugins (`pi-coding-agent` extension loader).
+- Out-of-band data channel with a minimum client version (partly covered in derived artifacts).
 
 ## Repository state
 
-- Local repository path: `/Users/david.helmus/workspace/personal/repository-patterns`
-- Remote publication: not configured
+- Local checkout: `$HOME/workspace/personal/repository-patterns`
+- Remote publication: [github.com/Skeptomenos/repository-patterns](https://github.com/Skeptomenos/repository-patterns), branch `main`
+- Validation: `./scripts/check-docs.sh` and `python3 scripts/test_check_docs.py`, run locally and in CI
 - Linear binding: none yet

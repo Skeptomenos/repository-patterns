@@ -15,11 +15,13 @@ This is not a rulebook. A pattern is a useful option when its context, benefits,
 
 ## Fast path for an LLM
 
-1. Read [`index.md`](index.md) for the current map.
-2. Select a need in [`docs/catalog.md`](docs/catalog.md).
+An agent enters at [[AGENTS]]. It explains how to resolve wiki links such as `[[catalog]]`: each one names the only file with that name in the repository. Every document is reachable from there.
+
+1. Read [[index]] for the current map.
+2. Select a need in [[catalog]]. The catalog groups 36 patterns under five questions: structure, extensibility, core runtime design, verification, and repository operations.
 3. Read the matching pattern page.
-4. Read the relevant [Pi case study](docs/examples/pi/README.md), or another example as the library grows.
-5. Use the [adoption worksheet](docs/templates/adoption-worksheet.md) to compare the pattern with the target repository.
+4. Read the relevant [[pi-case-study|Pi case study]], or another example as the library grows. [[pi-essence|What makes Pi work]] connects the patterns to eight design principles.
+5. Use the [[adoption-worksheet|adoption worksheet]] to compare the pattern with the target repository.
 
 Ask the LLM to return: the observed target state, the candidate pattern, fit, trade-offs, the smallest adoption step, and what remains unverified.
 
@@ -40,13 +42,15 @@ The repository separates reusable ideas from evidence and from decisions made in
 
 | Document | Question it answers |
 |---|---|
-| [`docs/catalog.md`](docs/catalog.md) | Which pattern might help? |
-| [`docs/architecture.md`](docs/architecture.md) | How is this meta repository organized? |
-| [`docs/patterns/README.md`](docs/patterns/README.md) | What does each pattern mean? |
-| [`docs/examples/pi/README.md`](docs/examples/pi/README.md) | How do the ideas appear in a real repository? |
-| [`docs/using-this-repo.md`](docs/using-this-repo.md) | How should a human or LLM use the material? |
-| [`docs/templates/`](docs/templates/) | How can a new pattern or case study be added? |
-| [`docs/decisions/0001-recommendations-not-rules.md`](docs/decisions/0001-recommendations-not-rules.md) | Why is this a recommendation library rather than a rulebook? |
+| [[catalog]] | Which pattern might help? |
+| [[library-architecture]] | How is this meta repository organized? |
+| [[pattern-index]] | What does each pattern mean? |
+| [[pi-case-study]] | How do the ideas appear in a real repository? |
+| [[pi-essence]] | Which design principles make Pi work, and where does it drift? |
+| [[pi-repository-layout]] | How does Pi arrange folders, packages, and documents? |
+| [[using-this-repo]] | How should a human or LLM use the material? |
+| [[pattern-template]], [[case-study-template]], [[adoption-worksheet]] | How can a new pattern or case study be added, or a pattern adopted? |
+| [[0001-recommendations-not-rules]] | Why is this a recommendation library rather than a rulebook? |
 
 ## Scope boundary
 
