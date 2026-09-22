@@ -73,7 +73,7 @@ See the [`agent` documentation](https://github.com/earendil-works/pi/tree/f07218
 
 ## Related patterns
 
-- [[single-writer-mutation|Single-writer mutation]]
-- [[extension-state-in-host-log|Extension state in the host log]]
-- [[in-band-terminal-streams|In-band terminal streams]]
-- [[visible-maturity|Visible maturity]]
+- [Single-writer mutation](single-writer-mutation.md)
+- [Extension state in the host log](extension-state-in-host-log.md)
+- [In-band terminal streams](in-band-terminal-streams.md)
+- [Visible maturity](visible-maturity.md)

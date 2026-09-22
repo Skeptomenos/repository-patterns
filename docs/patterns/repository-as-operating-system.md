@@ -42,7 +42,7 @@ See [`AGENTS.md`](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12bef05
 - prompt templates as maintainer macros: `/is`, `/pr`, `/cl`, `/wr`;
 - a project extension that imports CI agent sessions for local replay.
 
-`CONTRIBUTING.md` tells contributors to run agents from the repository root, so they pick up `AGENTS.md`. See [[progressive-disclosure|Progressive disclosure of instructions]] and [[multi-agent-safe-worktree|Multi-agent-safe working tree]].
+`CONTRIBUTING.md` tells contributors to run agents from the repository root, so they pick up `AGENTS.md`. See [Progressive disclosure of instructions](progressive-disclosure.md) and [Multi-agent-safe working tree](multi-agent-safe-worktree.md).
 
 **Observed (v0.87.1):** Some rules have a mechanism behind them: erasable-only syntax (a compiler option), exact pins, the lockfile gate, and generated-file checks. Others are instructions only. The linter turns `noExplicitAny` off, although `AGENTS.md` forbids `any`. Two inline `await import(` calls remain in package sources, although `AGENTS.md` forbids them. Changelog placement is audited by the `/cl` prompt, not by a check.
 
@@ -78,7 +78,7 @@ See [`AGENTS.md`](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12bef05
 
 ## Related patterns
 
-- [[progressive-disclosure|Progressive disclosure of instructions]]
-- [[multi-agent-safe-worktree|Multi-agent-safe working tree]]
-- [[executable-architecture-checks|Executable architecture checks]]
-- [[attention-budget-gate|Attention-budget contribution gate]]
+- [Progressive disclosure of instructions](progressive-disclosure.md)
+- [Multi-agent-safe working tree](multi-agent-safe-worktree.md)
+- [Executable architecture checks](executable-architecture-checks.md)
+- [Attention-budget contribution gate](attention-budget-gate.md)

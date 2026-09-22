@@ -67,7 +67,7 @@ reload: old contexts are marked stale -> callbacks receive a fresh context
 
 ## Related patterns
 
-- [[extensions-before-core|Extensions before core]]
-- [[fault-isolated-event-dispatch|Fault-isolated event dispatch]]
-- [[host-owned-ui-port|Host-owned UI port]]
-- [[explicit-context|Explicit context]]
+- [Extensions before core](extensions-before-core.md)
+- [Fault-isolated event dispatch](fault-isolated-event-dispatch.md)
+- [Host-owned UI port](host-owned-ui-port.md)
+- [Explicit context](explicit-context.md)

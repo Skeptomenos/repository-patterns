@@ -20,7 +20,7 @@
 
 | Pattern | Observed | Recommended interpretation | Limit |
 |---|---|---|---|
-| `[[pattern-name]]` | [evidence] | [recommendation] | [mismatch] |
+| `[Pattern title](../../patterns/pattern-name.md)` | [evidence] | [recommendation] | [mismatch] |
 
 ## Representative flow
 

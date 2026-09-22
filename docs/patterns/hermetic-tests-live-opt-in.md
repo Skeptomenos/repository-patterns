@@ -66,6 +66,6 @@ measurements   -> separate configs; never CI gates
 
 ## Related patterns
 
-- [[conformance-tests|Conformance tests]]
-- [[consumer-oriented-verification|Consumer-oriented verification]]
-- [[documentation-as-tested-surface|Documentation as a tested surface]]
+- [Conformance tests](conformance-tests.md)
+- [Consumer-oriented verification](consumer-oriented-verification.md)
+- [Documentation as a tested surface](documentation-as-tested-surface.md)

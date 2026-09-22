@@ -49,4 +49,4 @@ category: structure-and-boundaries
 
 ## Related patterns
 
-- `[[related-pattern-name]]`
+- `[Related pattern title](related-pattern-name.md)`

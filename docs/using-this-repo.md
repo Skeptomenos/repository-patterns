@@ -5,7 +5,7 @@
 Start with the design problem, not with a favorite architecture.
 
 1. Describe the constraint: for example, “provider changes keep leaking into the core” or “a workflow loses state after restart.”
-2. Find the closest need in [[catalog]].
+2. Find the closest need in [`docs/catalog.md`](catalog.md).
 3. Read the pattern's fit, trade-offs, and “poor fit” section.
 4. Read the linked case study.
 5. Compare the pattern with the target repository.
@@ -15,12 +15,12 @@ Start with the design problem, not with a favorite architecture.
 
 Use this repository as a source of recommendations, not as a policy file.
 
-Enter through the root `AGENTS.md`. Resolve a wiki link `[[name]]` to the only file named `name.md` in the repository. To scan all patterns at once, read the `description` line in each pattern's frontmatter.
+Enter through the root `AGENTS.md`. Follow relative links from there; every document is reachable. File names are unique, so a search by name finds exactly one file. To scan all patterns at once, read the `description` line in each pattern's frontmatter.
 
 For each request:
 
 1. Identify the target repository, audience, constraints, and desired outcome.
-2. Search [[catalog]] by need.
+2. Search [`docs/catalog.md`](catalog.md) by need.
 3. Extract the pattern's mechanism rather than copying its directory names.
 4. Use the case study only for evidence and concrete illustrations.
 5. State what is observed, what is inferred, and what is recommended.

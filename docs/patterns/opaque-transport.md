@@ -65,6 +65,6 @@ See [`pi-protocol`](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12bef
 
 ## Related patterns
 
-- [[host-owned-ui-port|Host-owned UI port]]
-- [[application-neutral-substrate|Application-neutral substrate]]
-- [[in-band-terminal-streams|In-band terminal streams]]
+- [Host-owned UI port](host-owned-ui-port.md)
+- [Application-neutral substrate](application-neutral-substrate.md)
+- [In-band terminal streams](in-band-terminal-streams.md)

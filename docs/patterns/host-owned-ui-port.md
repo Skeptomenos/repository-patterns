@@ -64,6 +64,6 @@ headless host    -> no-op port; ctx.hasUI = false
 
 ## Related patterns
 
-- [[core-and-host|Core and host]]
-- [[two-phase-extension-registration|Two-phase extension registration]]
-- [[opaque-transport|Opaque transport]]
+- [Core and host](core-and-host.md)
+- [Two-phase extension registration](two-phase-extension-registration.md)
+- [Opaque transport](opaque-transport.md)

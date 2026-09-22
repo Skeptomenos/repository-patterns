@@ -65,6 +65,6 @@ check: bundle the root for the browser, then assert the adapter is absent
 
 ## Related patterns
 
-- [[contract-and-adapter|Contract and adapter]]
-- [[executable-architecture-checks|Executable architecture checks]]
-- [[consumer-oriented-verification|Consumer-oriented verification]]
+- [Contract and adapter](contract-and-adapter.md)
+- [Executable architecture checks](executable-architecture-checks.md)
+- [Consumer-oriented verification](consumer-oriented-verification.md)

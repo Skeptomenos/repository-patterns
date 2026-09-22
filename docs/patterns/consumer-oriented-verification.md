@@ -59,7 +59,7 @@ The verification should state what it proves and what it cannot prove.
 
 ## Related patterns
 
-- [[dependencies-as-reviewed-code|Dependencies as reviewed code]]
-- [[staged-reversible-release|Staged, reversible release]]
-- [[hermetic-tests-live-opt-in|Hermetic tests, live tests by opt-in]]
-- [[documentation-as-tested-surface|Documentation as a tested surface]]
+- [Dependencies as reviewed code](dependencies-as-reviewed-code.md)
+- [Staged, reversible release](staged-reversible-release.md)
+- [Hermetic tests, live tests by opt-in](hermetic-tests-live-opt-in.md)
+- [Documentation as a tested surface](documentation-as-tested-surface.md)

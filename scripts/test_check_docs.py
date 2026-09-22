@@ -46,30 +46,34 @@ class CheckDocsTest(unittest.TestCase):
         errors, _, _ = check_docs.check(self.root)
         self.assertEqual(errors, [])
 
-    def test_unresolved_wiki_link(self):
-        self.append("docs/catalog.md", "\nSee [[no-such-page]].\n")
-        self.assert_fails_with("unresolved wiki link [[no-such-page]]")
+    def test_unresolved_link(self):
+        self.append("docs/catalog.md", "\nSee [missing](no-such-page.md).\n")
+        self.assert_fails_with("unresolved link docs/no-such-page.md")
 
-    def test_unresolved_heading(self):
-        self.append("docs/catalog.md", "\nSee [[index#No such heading]].\n")
-        self.assert_fails_with("unresolved heading")
+    def test_unresolved_heading_anchor(self):
+        self.append("docs/catalog.md", "\nSee [index](../index.md#no-such-heading).\n")
+        self.assert_fails_with("unresolved heading anchor index.md#no-such-heading")
 
-    def test_wiki_link_in_code_is_ignored(self):
-        self.append("docs/catalog.md", "\nWrite `[[no-such-page]]` to link.\n")
+    def test_unresolved_local_anchor(self):
+        self.append("docs/catalog.md", "\nSee [below](#no-such-heading).\n")
+        self.assert_fails_with("unresolved heading anchor docs/catalog.md#no-such-heading")
+
+    def test_link_in_code_is_ignored(self):
+        self.append("docs/catalog.md", "\nWrite `[x](no-such-page.md)` or `[[name]]` in prose.\n")
         errors, _, _ = check_docs.check(self.root)
         self.assertEqual(errors, [])
 
-    def test_relative_markdown_link(self):
-        self.append("index.md", "\nSee [the catalog](docs/catalog.md).\n")
-        self.assert_fails_with("use a wiki link")
+    def test_wiki_link_rejected(self):
+        self.append("docs/catalog.md", "\nSee [[index]].\n")
+        self.assert_fails_with("wiki link; use a relative Markdown link")
 
     def test_orphaned_page(self):
-        self.write("docs/orphan-page.md", "# Orphan\n\nLinks to [[index]] but nothing links here.\n")
+        self.write("docs/orphan-page.md", "# Orphan\n\nLinks to [the index](../index.md) but nothing links here.\n")
         self.assert_fails_with("docs/orphan-page.md: unreachable from AGENTS.md")
 
     def test_duplicate_basename(self):
         self.write("docs/examples/catalog.md", "# Another catalog\n")
-        self.assert_fails_with("duplicate basename 'catalog'")
+        self.assert_fails_with("duplicate basename 'catalog.md'")
 
     def test_missing_pattern_section(self):
         self.write(PATTERN, self.read(PATTERN).replace("## Poor fit signals", "## Misfits"))
@@ -87,7 +91,7 @@ class CheckDocsTest(unittest.TestCase):
     def test_pattern_missing_from_catalog(self):
         text = self.read(PATTERN).replace("name: change-axis-boundaries", "name: new-pattern")
         self.write("docs/patterns/new-pattern.md", text)
-        self.append("docs/patterns/pattern-index.md", "\n- [[new-pattern]]\n")
+        self.append("docs/patterns/pattern-index.md", "\n- [New pattern](new-pattern.md)\n")
         self.assert_fails_with("new-pattern.md: not listed in the pattern column")
 
     def test_second_evidence_pin(self):

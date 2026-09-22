@@ -2,6 +2,8 @@
 
 **Date:** 2026-09-22
 
+**Status:** Superseded in part on 2026-09-23 by [`0004-github-links.md`](0004-github-links.md). Documents now use relative Markdown links, because GitHub does not render wiki links. Discovery from `AGENTS.md`, unique file names, and pattern frontmatter still apply.
+
 ## Context
 
 Agents in other sessions use this library while they work on unrelated repositories. They enter at the root `AGENTS.md` and must find the right pattern without loading every page. Relative Markdown links depend on each file's folder, break when files move, and do not say which document they mean when a folder has several `README.md` files.

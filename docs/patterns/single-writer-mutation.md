@@ -64,6 +64,6 @@ External I/O should usually happen outside the mutation line, with its result br
 
 ## Related patterns
 
-- [[durable-effect-state|Durable effect state]]
-- [[extension-state-in-host-log|Extension state in the host log]]
-- [[multi-agent-safe-worktree|Multi-agent-safe working tree]]
+- [Durable effect state](durable-effect-state.md)
+- [Extension state in the host log](extension-state-in-host-log.md)
+- [Multi-agent-safe working tree](multi-agent-safe-worktree.md)

@@ -68,6 +68,6 @@ fast-changing data: publish out of band, keyed by a minimum client version
 
 ## Related patterns
 
-- [[capabilities-as-data|Capabilities as data]]
-- [[dependencies-as-reviewed-code|Dependencies as reviewed code]]
-- [[executable-architecture-checks|Executable architecture checks]]
+- [Capabilities as data](capabilities-as-data.md)
+- [Dependencies as reviewed code](dependencies-as-reviewed-code.md)
+- [Executable architecture checks](executable-architecture-checks.md)

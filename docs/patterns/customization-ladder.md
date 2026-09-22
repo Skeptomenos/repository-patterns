@@ -64,7 +64,7 @@ several resources together             -> package
 
 ## Related patterns
 
-- [[extensions-before-core|Extensions before core]]
-- [[progressive-disclosure|Progressive disclosure of instructions]]
-- [[layered-resource-discovery|Layered resource discovery]]
-- [[built-ins-through-public-seams|Built-ins through public seams]]
+- [Extensions before core](extensions-before-core.md)
+- [Progressive disclosure of instructions](progressive-disclosure.md)
+- [Layered resource discovery](layered-resource-discovery.md)
+- [Built-ins through public seams](built-ins-through-public-seams.md)

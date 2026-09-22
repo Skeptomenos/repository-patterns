@@ -64,6 +64,6 @@ model record:           {vendor, protocol, id, capabilities}
 
 ## Related patterns
 
-- [[contract-and-adapter|Contract and adapter]]
-- [[capabilities-as-data|Capabilities as data]]
-- [[derived-artifacts|Derived artifacts with a guarded source]]
+- [Contract and adapter](contract-and-adapter.md)
+- [Capabilities as data](capabilities-as-data.md)
+- [Derived artifacts with a guarded source](derived-artifacts.md)

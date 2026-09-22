@@ -29,9 +29,9 @@ host: CLI / UI / RPC / configuration / product policy
 
 **Observed:** `pi-agent-core` owns agent state, tool execution, and event streaming. `pi-coding-agent` owns CLI modes, sessions, resource loading, UI, and extensions. The same core events can feed interactive, print, JSON, or RPC modes. See [`pi-agent-core`](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12bef056a7058c3dd49dfe41abe/packages/agent/README.md) and [`coding-agent extensions`](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12bef056a7058c3dd49dfe41abe/packages/coding-agent/docs/extensions.md).
 
-**Observed (v0.87.1):** The split repeats inside `pi-coding-agent`. `AgentSession` acts as the core, and each mode acts as a host. Interactive, print, JSON, RPC, and SDK modes drive the same session. Each injects its own ports when it binds extensions: a UI context, command actions, a shutdown handler, and an error sink. The core returns diagnostics, and the host decides how to show them. See [[host-owned-ui-port|Host-owned UI port]].
+**Observed (v0.87.1):** The split repeats inside `pi-coding-agent`. `AgentSession` acts as the core, and each mode acts as a host. Interactive, print, JSON, RPC, and SDK modes drive the same session. Each injects its own ports when it binds extensions: a UI context, command actions, a shutdown handler, and an error sink. The core returns diagnostics, and the host decides how to show them. See [Host-owned UI port](host-owned-ui-port.md).
 
-**Observed (v0.87.1):** Policy defaults differ by host. The CLI resolves project trust before it loads project resources. The SDK's `SettingsManager.create` defaults `projectTrusted` to `true`. See [[trust-gated-loading|Trust-gated loading]].
+**Observed (v0.87.1):** Policy defaults differ by host. The CLI resolves project trust before it loads project resources. The SDK's `SettingsManager.create` defaults `projectTrusted` to `true`. See [Trust-gated loading](trust-gated-loading.md).
 
 **Recommended:** Keep the core unaware of product presentation. Let the host decide how to display, configure, authorize, and package the core. Write down each host's policy defaults next to its entry point.
 
@@ -62,7 +62,7 @@ host: CLI / UI / RPC / configuration / product policy
 
 ## Related patterns
 
-- [[host-owned-ui-port|Host-owned UI port]]
-- [[extensions-before-core|Extensions before core]]
-- [[trust-gated-loading|Trust-gated loading]]
-- [[canonical-record-projected-per-target|Canonical record, projected per target]]
+- [Host-owned UI port](host-owned-ui-port.md)
+- [Extensions before core](extensions-before-core.md)
+- [Trust-gated loading](trust-gated-loading.md)
+- [Canonical record, projected per target](canonical-record-projected-per-target.md)

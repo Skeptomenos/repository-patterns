@@ -45,7 +45,7 @@ flowchart TB
 
 The graph is layered but not a single straight line. Chord, remote transport, durable design, and evaluation are parallel capabilities.
 
-**Observed:** The edges come from each package's `dependencies` at v0.87.1. `pi-coding-agent` lists client, protocol, and server only as dev dependencies, for its experimental path. `pi-evals` is private and depends on the others only for development. See the [[pi-repository-layout|repository layout]] for the full table.
+**Observed:** The edges come from each package's `dependencies` at v0.87.1. `pi-coding-agent` lists client, protocol, and server only as dev dependencies, for its experimental path. `pi-evals` is private and depends on the others only for development. See the [repository layout](pi-repository-layout.md) for the full table.
 
 ## Layer observations
 
@@ -67,7 +67,7 @@ Chord, telemetry, and TUI are reusable concerns. They are kept outside the main 
 
 ### Extension boundary
 
-Inside `pi-coding-agent`, `AgentSession` is a mode-independent core, and each mode is a host. Extensions register through one API in two phases, receive a UI port that each host implements, and store state as entries in the session log. Resources come from ranked scopes, and project resources load only after trust is resolved. See [[two-phase-extension-registration|Two-phase extension registration]] and [[layered-resource-discovery|Layered resource discovery]].
+Inside `pi-coding-agent`, `AgentSession` is a mode-independent core, and each mode is a host. Extensions register through one API in two phases, receive a UI port that each host implements, and store state as entries in the session log. Resources come from ranked scopes, and project resources load only after trust is resolved. See [Two-phase extension registration](../../patterns/two-phase-extension-registration.md) and [Layered resource discovery](../../patterns/layered-resource-discovery.md).
 
 ### Recovery boundary
 
@@ -99,4 +99,4 @@ composition change    -> chord
 observability change  -> telemetry
 ```
 
-That alignment is more reusable than any individual folder name. Executable checks keep it from eroding; see [[executable-architecture-checks|Executable architecture checks]].
+That alignment is more reusable than any individual folder name. Executable checks keep it from eroding; see [Executable architecture checks](../../patterns/executable-architecture-checks.md).

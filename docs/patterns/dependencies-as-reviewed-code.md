@@ -65,7 +65,7 @@ CI           : actions pinned to commit SHAs; publishing through OIDC with prove
 
 ## Related patterns
 
-- [[derived-artifacts|Derived artifacts with a guarded source]]
-- [[consumer-oriented-verification|Consumer-oriented verification]]
-- [[staged-reversible-release|Staged, reversible release]]
-- [[declared-trust-boundary|Declared trust boundary]]
+- [Derived artifacts with a guarded source](derived-artifacts.md)
+- [Consumer-oriented verification](consumer-oriented-verification.md)
+- [Staged, reversible release](staged-reversible-release.md)
+- [Declared trust boundary](declared-trust-boundary.md)

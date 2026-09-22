@@ -72,6 +72,6 @@ package layer:
 
 ## Related patterns
 
-- [[trust-gated-loading|Trust-gated loading]]
-- [[customization-ladder|Customization ladder]]
-- [[extensions-before-core|Extensions before core]]
+- [Trust-gated loading](trust-gated-loading.md)
+- [Customization ladder](customization-ladder.md)
+- [Extensions before core](extensions-before-core.md)

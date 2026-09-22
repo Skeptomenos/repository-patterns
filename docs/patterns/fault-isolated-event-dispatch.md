@@ -66,6 +66,6 @@ fatal crash -> match stack frames to plugin paths -> name the plugin
 
 ## Related patterns
 
-- [[two-phase-extension-registration|Two-phase extension registration]]
-- [[extensions-before-core|Extensions before core]]
-- [[in-band-terminal-streams|In-band terminal streams]]
+- [Two-phase extension registration](two-phase-extension-registration.md)
+- [Extensions before core](extensions-before-core.md)
+- [In-band terminal streams](in-band-terminal-streams.md)

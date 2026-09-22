@@ -30,7 +30,7 @@ lifecycle: incubate inside the first consumer -> extract at the second consumer 
 
 ## Pi example
 
-**Observed:** Pi's packages match its sources of change: providers (`pi-ai`), the agent loop (`pi-agent-core`), product and UI (`pi-coding-agent`), the composition substrate (`chord`), transport (`pi-protocol`, `pi-client`, `pi-server`), storage backends (`session-backends/*`), and observability (`pi-telemetry`). See the [root README](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12bef056a7058c3dd49dfe41abe/README.md) and the [[pi-architecture|layered architecture notes]].
+**Observed:** Pi's packages match its sources of change: providers (`pi-ai`), the agent loop (`pi-agent-core`), product and UI (`pi-coding-agent`), the composition substrate (`chord`), transport (`pi-protocol`, `pi-client`, `pi-server`), storage backends (`session-backends/*`), and observability (`pi-telemetry`). See the [root README](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12bef056a7058c3dd49dfe41abe/README.md) and the [layered architecture notes](../examples/pi/pi-architecture.md).
 
 **Observed:** Boundaries move when evidence arrives.
 
@@ -68,7 +68,7 @@ lifecycle: incubate inside the first consumer -> extract at the second consumer 
 
 ## Related patterns
 
-- [[contract-and-adapter|Contract and adapter]]
-- [[core-and-host|Core and host]]
-- [[application-neutral-substrate|Application-neutral substrate]]
-- [[runtime-named-entry-points|Runtime-named entry points]]
+- [Contract and adapter](contract-and-adapter.md)
+- [Core and host](core-and-host.md)
+- [Application-neutral substrate](application-neutral-substrate.md)
+- [Runtime-named entry points](runtime-named-entry-points.md)

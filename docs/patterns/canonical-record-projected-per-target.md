@@ -66,6 +66,6 @@ application record (open union: user, assistant, tool, + application kinds)
 
 ## Related patterns
 
-- [[contract-and-adapter|Contract and adapter]]
-- [[protocol-and-vendor-axes|Protocol and vendor axes]]
-- [[core-and-host|Core and host]]
+- [Contract and adapter](contract-and-adapter.md)
+- [Protocol and vendor axes](protocol-and-vendor-axes.md)
+- [Core and host](core-and-host.md)

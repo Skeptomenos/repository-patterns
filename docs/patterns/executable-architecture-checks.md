@@ -69,7 +69,7 @@ every check                                  -> its own regression test that nam
 
 ## Related patterns
 
-- [[application-neutral-substrate|Application-neutral substrate]]
-- [[runtime-named-entry-points|Runtime-named entry points]]
-- [[conformance-tests|Conformance tests]]
-- [[repository-as-operating-system|Repository as operating system]]
+- [Application-neutral substrate](application-neutral-substrate.md)
+- [Runtime-named entry points](runtime-named-entry-points.md)
+- [Conformance tests](conformance-tests.md)
+- [Repository as operating system](repository-as-operating-system.md)

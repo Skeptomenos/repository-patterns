@@ -11,16 +11,16 @@ The library documents 36 patterns visible in the Pi repository and translates th
 
 | If you want to... | Start here |
 |---|---|
-| Choose a pattern for a current design problem | [[catalog]] |
-| Understand why Pi's patterns fit together | [[pi-essence]] |
-| See how Pi arranges folders, packages, and documents | [[pi-repository-layout]] |
-| Understand the repository's own information architecture | [[library-architecture]] |
-| Learn how to use the material as an LLM | [[using-this-repo]] |
-| See the ideas in one substantial codebase | [[pi-case-study]] |
-| Add a pattern | [[pattern-template]] |
-| Add a case study | [[case-study-template]] |
-| See which patterns this repository applies to itself | [[0003-self-adoption]] |
-| Understand the wiki links and the discovery rules | [[0002-wiki-links-and-discovery]] |
+| Choose a pattern for a current design problem | [`docs/catalog.md`](docs/catalog.md) |
+| Understand why Pi's patterns fit together | [`docs/examples/pi/pi-essence.md`](docs/examples/pi/pi-essence.md) |
+| See how Pi arranges folders, packages, and documents | [`docs/examples/pi/pi-repository-layout.md`](docs/examples/pi/pi-repository-layout.md) |
+| Understand the repository's own information architecture | [`docs/library-architecture.md`](docs/library-architecture.md) |
+| Learn how to use the material as an LLM | [`docs/using-this-repo.md`](docs/using-this-repo.md) |
+| See the ideas in one substantial codebase | [`docs/examples/pi/pi-case-study.md`](docs/examples/pi/pi-case-study.md) |
+| Add a pattern | [`docs/templates/pattern-template.md`](docs/templates/pattern-template.md) |
+| Add a case study | [`docs/templates/case-study-template.md`](docs/templates/case-study-template.md) |
+| See which patterns this repository applies to itself | [`docs/decisions/0003-self-adoption.md`](docs/decisions/0003-self-adoption.md) |
+| Understand the link and discovery rules | [`docs/decisions/0004-github-links.md`](docs/decisions/0004-github-links.md) |
 
 ## Coverage map
 
@@ -35,7 +35,7 @@ The library documents 36 patterns visible in the Pi repository and translates th
 ## Current evidence boundary
 
 - The Pi example is a source, documentation, workflow, and git-history analysis at release v0.87.1, commit `f07218c4d4bbc12bef056a7058c3dd49dfe41abe`.
-- The first analysis used commit `3390bd93630965a12a0a1a5c36ce890ec22f7e1d`. Since 2026-09-22, v0.87.1 owns every claim and link. The case study lists the [[pi-case-study#Corrections since the first analysis|corrections]].
+- The first analysis used commit `3390bd93630965a12a0a1a5c36ce890ec22f7e1d`. Since 2026-09-22, v0.87.1 owns every claim and link. The case study lists the [corrections](docs/examples/pi/pi-case-study.md#corrections-since-the-first-analysis).
 - The Pi case study does not claim that every documented experimental design is fully shipped or production-accepted. At v0.87.1 the durable harness runs only on an experimental path.
 - No target repository is assumed to need Pi's number of packages, durable runtime, or contributor gate.
 

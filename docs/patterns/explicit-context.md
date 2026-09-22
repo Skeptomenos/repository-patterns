@@ -64,6 +64,6 @@ See [`pi-telemetry`](https://github.com/earendil-works/pi/blob/f07218c4d4bbc12be
 
 ## Related patterns
 
-- [[application-neutral-substrate|Application-neutral substrate]]
-- [[two-phase-extension-registration|Two-phase extension registration]]
-- [[durable-effect-state|Durable effect state]]
+- [Application-neutral substrate](application-neutral-substrate.md)
+- [Two-phase extension registration](two-phase-extension-registration.md)
+- [Durable effect state](durable-effect-state.md)

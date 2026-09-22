@@ -62,6 +62,6 @@ helpers : supportedLevels(model), clampLevel(model, level), cost(model, usage)
 
 ## Related patterns
 
-- [[protocol-and-vendor-axes|Protocol and vendor axes]]
-- [[derived-artifacts|Derived artifacts with a guarded source]]
-- [[contract-and-adapter|Contract and adapter]]
+- [Protocol and vendor axes](protocol-and-vendor-axes.md)
+- [Derived artifacts with a guarded source](derived-artifacts.md)
+- [Contract and adapter](contract-and-adapter.md)

@@ -64,6 +64,6 @@ eval     -> same build with and without docs; compare paired runs
 
 ## Related patterns
 
-- [[consumer-oriented-verification|Consumer-oriented verification]]
-- [[progressive-disclosure|Progressive disclosure of instructions]]
-- [[hermetic-tests-live-opt-in|Hermetic tests, live tests by opt-in]]
+- [Consumer-oriented verification](consumer-oriented-verification.md)
+- [Progressive disclosure of instructions](progressive-disclosure.md)
+- [Hermetic tests, live tests by opt-in](hermetic-tests-live-opt-in.md)

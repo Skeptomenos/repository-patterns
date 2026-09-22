@@ -62,6 +62,6 @@ setup failure (auth, lazy import) -> a single error event
 
 ## Related patterns
 
-- [[fault-isolated-event-dispatch|Fault-isolated event dispatch]]
-- [[durable-effect-state|Durable effect state]]
-- [[protocol-and-vendor-axes|Protocol and vendor axes]]
+- [Fault-isolated event dispatch](fault-isolated-event-dispatch.md)
+- [Durable effect state](durable-effect-state.md)
+- [Protocol and vendor axes](protocol-and-vendor-axes.md)

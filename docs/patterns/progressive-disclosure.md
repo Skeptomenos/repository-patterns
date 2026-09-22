@@ -62,6 +62,6 @@ repository    : short AGENTS.md -> "for releases, load .pi/skills/release.md"
 
 ## Related patterns
 
-- [[repository-as-operating-system|Repository as operating system]]
-- [[customization-ladder|Customization ladder]]
-- [[documentation-as-tested-surface|Documentation as a tested surface]]
+- [Repository as operating system](repository-as-operating-system.md)
+- [Customization ladder](customization-ladder.md)
+- [Documentation as a tested surface](documentation-as-tested-surface.md)

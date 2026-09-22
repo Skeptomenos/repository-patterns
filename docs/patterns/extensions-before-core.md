@@ -33,7 +33,7 @@ An extension boundary is useful only if its lifecycle, capabilities, errors, and
 
 **Observed:** `CONTRIBUTING.md` also limits the seams themselves: hook points "should be well considered and discussed to avoid adding unmaintainable bloat and complex interactions".
 
-**Inferred:** Each seam is core surface with a budget. Pi makes the principle workable with a set of supporting patterns: a [[customization-ladder|customization ladder]], [[two-phase-extension-registration|two-phase registration]], [[fault-isolated-event-dispatch|fault-isolated dispatch]], [[layered-resource-discovery|layered discovery]], and [[built-ins-through-public-seams|built-ins that ship through the same seams]].
+**Inferred:** Each seam is core surface with a budget. Pi makes the principle workable with a set of supporting patterns: a [customization ladder](customization-ladder.md), [two-phase registration](two-phase-extension-registration.md), [fault-isolated dispatch](fault-isolated-event-dispatch.md), [layered discovery](layered-resource-discovery.md), and [built-ins that ship through the same seams](built-ins-through-public-seams.md).
 
 **Recommended:** Ask whether the feature changes the core invariant or only adds a capability. Keep it outside the core when the latter is true. Discuss a new seam as carefully as a new core feature.
 
@@ -63,7 +63,7 @@ An extension boundary is useful only if its lifecycle, capabilities, errors, and
 
 ## Related patterns
 
-- [[customization-ladder|Customization ladder]]
-- [[two-phase-extension-registration|Two-phase extension registration]]
-- [[built-ins-through-public-seams|Built-ins through public seams]]
-- [[core-and-host|Core and host]]
+- [Customization ladder](customization-ladder.md)
+- [Two-phase extension registration](two-phase-extension-registration.md)
+- [Built-ins through public seams](built-ins-through-public-seams.md)
+- [Core and host](core-and-host.md)

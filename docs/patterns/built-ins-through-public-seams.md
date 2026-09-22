@@ -64,6 +64,6 @@ optional built-in feature -> ships as a hidden inline extension
 
 ## Related patterns
 
-- [[extensions-before-core|Extensions before core]]
-- [[contract-and-adapter|Contract and adapter]]
-- [[customization-ladder|Customization ladder]]
+- [Extensions before core](extensions-before-core.md)
+- [Contract and adapter](contract-and-adapter.md)
+- [Customization ladder](customization-ladder.md)

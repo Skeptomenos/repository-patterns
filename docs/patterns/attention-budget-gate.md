@@ -62,6 +62,6 @@ gates read the registry through the API and never check out contributor code
 
 ## Related patterns
 
-- [[repository-as-operating-system|Repository as operating system]]
-- [[declared-trust-boundary|Declared trust boundary]]
-- [[multi-agent-safe-worktree|Multi-agent-safe working tree]]
+- [Repository as operating system](repository-as-operating-system.md)
+- [Declared trust boundary](declared-trust-boundary.md)
+- [Multi-agent-safe working tree](multi-agent-safe-worktree.md)

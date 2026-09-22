@@ -64,6 +64,6 @@ CI:    source archive -> binaries built from the archive -> cross-platform smoke
 
 ## Related patterns
 
-- [[consumer-oriented-verification|Consumer-oriented verification]]
-- [[dependencies-as-reviewed-code|Dependencies as reviewed code]]
-- [[derived-artifacts|Derived artifacts with a guarded source]]
+- [Consumer-oriented verification](consumer-oriented-verification.md)
+- [Dependencies as reviewed code](dependencies-as-reviewed-code.md)
+- [Derived artifacts with a guarded source](derived-artifacts.md)

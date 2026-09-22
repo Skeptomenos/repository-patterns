@@ -64,6 +64,6 @@ rendering: renderer keyed by customType
 
 ## Related patterns
 
-- [[durable-effect-state|Durable effect state]]
-- [[single-writer-mutation|Single-writer mutation]]
-- [[two-phase-extension-registration|Two-phase extension registration]]
+- [Durable effect state](durable-effect-state.md)
+- [Single-writer mutation](single-writer-mutation.md)
+- [Two-phase extension registration](two-phase-extension-registration.md)

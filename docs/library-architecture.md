@@ -112,15 +112,15 @@ flowchart LR
 
 | Mechanism | What it guarantees | Enforced by |
 |---|---|---|
-| Wiki links (`[[name]]`) | A reference names its target document, independent of folders | `scripts/check_docs.py`: every wiki link resolves, including headings |
-| Unique file names | Each wiki link has exactly one target | `scripts/check_docs.py`: no duplicate basenames |
+| Relative Markdown links | Every reference renders as a link on GitHub and in editors | `scripts/check_docs.py`: every relative link and heading anchor resolves; wiki links are rejected |
+| Unique file names | A search by file name finds exactly one document | `scripts/check_docs.py`: no duplicate basenames |
 | Reachability from `AGENTS.md` | Following links from the root reaches every document | `scripts/check_docs.py`: no orphaned pages |
 | Pattern frontmatter | An agent can scan every pattern's need without reading bodies | `scripts/check_docs.py`: `name`, `description`, `category` on every pattern |
 | Catalog coverage | Every pattern is routable by need, under its category | `scripts/check_docs.py`: catalog and pattern index list every pattern |
 | One pin per source repository | All evidence for a case study comes from one commit | `scripts/check_docs.py`: one ref per external repository, recorded in the index |
 
-The checks have their own tests (`scripts/test_check_docs.py`), and CI runs both. See [[0002-wiki-links-and-discovery]] for the decision and [[0003-self-adoption]] for which patterns this repository applies to itself.
+The checks have their own tests (`scripts/test_check_docs.py`), and CI runs both. See [`docs/decisions/0004-github-links.md`](decisions/0004-github-links.md) for the link decision and [`docs/decisions/0003-self-adoption.md`](decisions/0003-self-adoption.md) for which patterns this repository applies to itself.
 
 ## How to explore this map
 
-Start with [[catalog]], then choose one pattern. Ask for a focused dive into a pattern, a case study, or an adoption worksheet rather than loading the entire repository at once.
+Start with [`docs/catalog.md`](catalog.md), then choose one pattern. Ask for a focused dive into a pattern, a case study, or an adoption worksheet rather than loading the entire repository at once.

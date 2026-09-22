@@ -62,6 +62,6 @@ pass 2: load project resources; reuse the plugin instances from pass 1
 
 ## Related patterns
 
-- [[declared-trust-boundary|Declared trust boundary]]
-- [[layered-resource-discovery|Layered resource discovery]]
-- [[core-and-host|Core and host]]
+- [Declared trust boundary](declared-trust-boundary.md)
+- [Layered resource discovery](layered-resource-discovery.md)
+- [Core and host](core-and-host.md)

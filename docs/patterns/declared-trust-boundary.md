@@ -61,6 +61,6 @@ product     : trust prompts are user experience, not a sandbox
 
 ## Related patterns
 
-- [[trust-gated-loading|Trust-gated loading]]
-- [[attention-budget-gate|Attention-budget contribution gate]]
-- [[dependencies-as-reviewed-code|Dependencies as reviewed code]]
+- [Trust-gated loading](trust-gated-loading.md)
+- [Attention-budget contribution gate](attention-budget-gate.md)
+- [Dependencies as reviewed code](dependencies-as-reviewed-code.md)

@@ -68,7 +68,7 @@ docs:  status line at the top + "normative" or "proposal" label
 
 ## Related patterns
 
-- [[consumer-oriented-verification|Consumer-oriented verification]]
-- [[executable-architecture-checks|Executable architecture checks]]
-- [[repository-as-operating-system|Repository as operating system]]
-- [[progressive-disclosure|Progressive disclosure of instructions]]
+- [Consumer-oriented verification](consumer-oriented-verification.md)
+- [Executable architecture checks](executable-architecture-checks.md)
+- [Repository as operating system](repository-as-operating-system.md)
+- [Progressive disclosure of instructions](progressive-disclosure.md)

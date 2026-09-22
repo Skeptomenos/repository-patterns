@@ -64,6 +64,6 @@ products -> depend on the substrate (never the reverse)
 
 ## Related patterns
 
-- [[change-axis-boundaries|Change-axis boundaries]]
-- [[executable-architecture-checks|Executable architecture checks]]
-- [[explicit-context|Explicit context]]
+- [Change-axis boundaries](change-axis-boundaries.md)
+- [Executable architecture checks](executable-architecture-checks.md)
+- [Explicit context](explicit-context.md)

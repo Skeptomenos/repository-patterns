@@ -2,9 +2,10 @@
 """Documentation checks for Repository Patterns.
 
 Each rule prevents a failure that breaks discovery for a reader or an agent:
-unique file names, resolvable wiki links, reachability from AGENTS.md, the
-shape of every pattern page, catalog coverage, and one evidence pin per
-external repository. Standard library only; no network.
+unique file names, resolvable relative links and heading anchors, no wiki
+links (GitHub does not render them), reachability from AGENTS.md, the shape of
+every pattern page, catalog coverage, and one evidence pin per external
+repository. Standard library only; no network.
 """
 
 import argparse
@@ -52,10 +53,11 @@ PATTERN_SECTIONS = [
 ]
 CASE_STUDY_TERMS = {"docs/examples/pi/pi-case-study.md": ["Observed", "Recommendation", "Important limit"]}
 
-WIKI_LINK = re.compile(r"\[\[([^\]|#\\]+)(?:#([^\]|\\]+))?(?:\\?\|[^\]]+)?\]\]")
-RELATIVE_DOC_LINK = re.compile(r"\]\((?![a-z]+:|#)[^)\s]*\.md(?:#[^)\s]*)?\)")
+LINK = re.compile(r"\[[^\]]*\]\(([^)\s]+)\)")
+WIKI_LINK = re.compile(r"\[\[[^\]]+\]\]")
+EXTERNAL = re.compile(r"^[a-z][a-z0-9+.-]*:", re.IGNORECASE)
 EXTERNAL_REF = re.compile(r"https://github\.com/([\w.-]+/[\w.-]+)/(?:blob|tree)/([0-9a-f]{7,40})/")
-HEADING = re.compile(r"^#{1,6}\s+(.*?)\s*$")
+HEADING = re.compile(r"^#{1,6}\s+(.*?)\s*#*\s*$")
 INLINE_CODE = re.compile(r"`[^`]*`")
 
 
@@ -80,12 +82,21 @@ def prose_lines(text):
             yield number, INLINE_CODE.sub("", line)
 
 
-def normalize(heading):
-    return " ".join(heading.split()).casefold()
-
-
-def headings(text):
-    return {normalize(m.group(1)) for _, line in prose_lines(text) if (m := HEADING.match(line))}
+def anchors(text):
+    """GitHub heading anchors: lower case, punctuation removed, spaces to hyphens, duplicates numbered."""
+    seen = defaultdict(int)
+    result = set()
+    fence = False
+    for line in text.splitlines():
+        if line.lstrip().startswith("```"):
+            fence = not fence
+            continue
+        match = None if fence else HEADING.match(line)
+        if match:
+            slug = re.sub(r"[^\w\- ]", "", match.group(1).lower()).replace(" ", "-")
+            result.add(slug if seen[slug] == 0 else f"{slug}-{seen[slug]}")
+            seen[slug] += 1
+    return result
 
 
 def frontmatter(text):
@@ -102,6 +113,19 @@ def frontmatter(text):
     return fields
 
 
+def document_links(rel, line):
+    """Yield (target document or None, anchor) for each relative link on a line."""
+    for match in LINK.finditer(line):
+        target = match.group(1)
+        if EXTERNAL.match(target):
+            continue
+        path, _, anchor = target.partition("#")
+        if not path:
+            yield rel, anchor
+            continue
+        yield os.path.normpath(os.path.join(os.path.dirname(rel), path)), anchor
+
+
 def check(root):
     errors = []
     files = markdown_files(root)
@@ -116,29 +140,25 @@ def check(root):
 
     by_name = defaultdict(list)
     for rel in files:
-        by_name[os.path.splitext(os.path.basename(rel))[0]].append(rel)
+        by_name[os.path.basename(rel)].append(rel)
     for name, paths in sorted(by_name.items()):
         if len(paths) > 1:
-            errors.append(f"duplicate basename '{name}': {', '.join(paths)} (wiki links need unique names)")
-    target = {name: paths[0] for name, paths in by_name.items()}
+            errors.append(f"duplicate basename '{name}': {', '.join(paths)} (a search by name must find one file)")
 
     graph = defaultdict(set)
-    heading_cache = {}
+    anchor_cache = {}
     for rel in files:
         for number, line in prose_lines(texts[rel]):
-            if RELATIVE_DOC_LINK.search(line):
-                errors.append(f"{rel}:{number}: relative Markdown link to a document; use a wiki link")
-            for match in WIKI_LINK.finditer(line):
-                name, heading = match.group(1).strip(), match.group(2)
-                if name not in target:
-                    errors.append(f"{rel}:{number}: unresolved wiki link [[{name}]]")
-                    continue
-                dest = target[name]
-                graph[rel].add(dest)
-                if heading:
-                    known = heading_cache.setdefault(dest, headings(texts[dest]))
-                    if normalize(heading) not in known:
-                        errors.append(f"{rel}:{number}: unresolved heading [[{name}#{heading}]]")
+            if WIKI_LINK.search(line):
+                errors.append(f"{rel}:{number}: wiki link; use a relative Markdown link, because GitHub does not render wiki links")
+            for dest, anchor in document_links(rel, line):
+                if dest in texts:
+                    if dest != rel:
+                        graph[rel].add(dest)
+                    if anchor and anchor not in anchor_cache.setdefault(dest, anchors(texts[dest])):
+                        errors.append(f"{rel}:{number}: unresolved heading anchor {dest}#{anchor}")
+                elif not os.path.exists(os.path.join(root, dest)):
+                    errors.append(f"{rel}:{number}: unresolved link {dest}")
 
     if ROOT_DOCUMENT in texts:
         reached = {ROOT_DOCUMENT}
@@ -150,23 +170,22 @@ def check(root):
                     queue.append(dest)
         for rel in files:
             if rel not in reached:
-                errors.append(f"{rel}: unreachable from {ROOT_DOCUMENT} by wiki links")
+                errors.append(f"{rel}: unreachable from {ROOT_DOCUMENT} by relative links")
 
-    patterns = sorted(
-        rel for rel in files if os.path.dirname(rel) == PATTERN_DIR and rel != PATTERN_INDEX
-    )
+    patterns = sorted(rel for rel in files if os.path.dirname(rel) == PATTERN_DIR and rel != PATTERN_INDEX)
     catalog_category = {}
     if CATALOG in texts:
         category = None
         for _, line in prose_lines(texts[CATALOG]):
             if line.startswith("## "):
                 category = CATEGORIES.get(line[3:].strip())
-            if line.startswith("|") and category:
-                for match in WIKI_LINK.finditer(line.split("|")[2] if line.count("|") > 2 else ""):
-                    catalog_category[match.group(1).strip()] = category
+            cells = line.split("|")
+            if line.startswith("|") and category and len(cells) > 2:
+                for dest, _ in document_links(CATALOG, cells[2]):
+                    catalog_category[dest] = category
     index_links = set()
     if PATTERN_INDEX in texts:
-        index_links = {m.group(1).strip() for _, line in prose_lines(texts[PATTERN_INDEX]) for m in WIKI_LINK.finditer(line)}
+        index_links = {dest for _, line in prose_lines(texts[PATTERN_INDEX]) for dest, _ in document_links(PATTERN_INDEX, line)}
 
     for rel in patterns:
         name = os.path.splitext(os.path.basename(rel))[0]
@@ -188,13 +207,13 @@ def check(root):
         if "**Observed" not in text:
             errors.append(f"{rel}: no Observed evidence label")
         related = text.split("## Related patterns", 1)[-1] if "## Related patterns" in text else ""
-        if not WIKI_LINK.search(related):
-            errors.append(f"{rel}: Related patterns has no wiki link")
-        if name not in catalog_category:
+        if not any(dest.endswith(".md") for line in related.splitlines() for dest, _ in document_links(rel, line)):
+            errors.append(f"{rel}: Related patterns has no link to another document")
+        if rel not in catalog_category:
             errors.append(f"{rel}: not listed in the pattern column of {CATALOG}")
-        elif fields.get("category") and catalog_category[name] != fields.get("category"):
-            errors.append(f"{rel}: category '{fields.get('category')}' differs from its catalog group '{catalog_category[name]}'")
-        if name not in index_links:
+        elif fields.get("category") and catalog_category[rel] != fields.get("category"):
+            errors.append(f"{rel}: category '{fields.get('category')}' differs from its catalog group '{catalog_category[rel]}'")
+        if rel not in index_links:
             errors.append(f"{rel}: not listed in {PATTERN_INDEX}")
 
     refs = defaultdict(set)

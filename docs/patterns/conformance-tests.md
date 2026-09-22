@@ -68,6 +68,6 @@ See the [`agent conformance tests`](https://github.com/earendil-works/pi/tree/f0
 
 ## Related patterns
 
-- [[contract-and-adapter|Contract and adapter]]
-- [[executable-architecture-checks|Executable architecture checks]]
-- [[hermetic-tests-live-opt-in|Hermetic tests, live tests by opt-in]]
+- [Contract and adapter](contract-and-adapter.md)
+- [Executable architecture checks](executable-architecture-checks.md)
+- [Hermetic tests, live tests by opt-in](hermetic-tests-live-opt-in.md)

@@ -63,6 +63,6 @@ review : read pull requests without switching the tree (diff, show ref:path)
 
 ## Related patterns
 
-- [[repository-as-operating-system|Repository as operating system]]
-- [[progressive-disclosure|Progressive disclosure of instructions]]
-- [[single-writer-mutation|Single-writer mutation]]
+- [Repository as operating system](repository-as-operating-system.md)
+- [Progressive disclosure of instructions](progressive-disclosure.md)
+- [Single-writer mutation](single-writer-mutation.md)
